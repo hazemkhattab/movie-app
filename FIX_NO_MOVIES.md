@@ -1,7 +1,7 @@
 # 🚨 "No Movies Found" - Quick Fix Guide
 
 ## The Problem
-You're seeing "No movies found" on your deployed Vercel site because the environment variables aren't set up correctly.
+Your app now uses serverless API routes (recommended by Vercel). You need to set environment variables in Vercel for the backend API routes to work.
 
 ## The Solution (5 Minutes)
 

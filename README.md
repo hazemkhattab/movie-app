@@ -10,6 +10,8 @@ A modern movie discovery application built with Next.js 16, featuring server-sid
 - 📱 Responsive design
 - ⚡ Server-side rendering for better SEO
 - 🎨 Modern UI with gradient effects and animations
+- 🔒 Secure API routes (API key never exposed to browser)
+- 🚀 Serverless functions for optimal Vercel deployment
 
 ## 🚀 Quick Start
 
@@ -84,20 +86,24 @@ For detailed deployment instructions, see [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOY
 movie-app-master/
 ├── src/
 │   └── app/
-│       ├── components/      # React components
+│       ├── api/                # API Routes (Serverless Functions)
+│       │   ├── movies/         # Get popular movies
+│       │   ├── movie/[id]/     # Get movie details
+│       │   └── search/         # Search movies
+│       ├── components/         # React components
 │       │   ├── Navbar.jsx
 │       │   ├── Footer.jsx
 │       │   ├── MovieCard.jsx
 │       │   ├── SearchMovie.jsx
 │       │   └── Pagination.jsx
-│       ├── movies/          # Movies list page
-│       ├── movie/[id]/      # Movie detail page
-│       ├── about/           # About page
-│       ├── layout.js        # Root layout
-│       └── page.js          # Home page
-├── public/                  # Static assets
-├── .env.local              # Environment variables (create this)
-└── next.config.mjs         # Next.js configuration
+│       ├── movies/             # Movies list page
+│       ├── movie/[id]/         # Movie detail page
+│       ├── about/              # About page
+│       ├── layout.js           # Root layout
+│       └── page.js             # Home page
+├── public/                     # Static assets
+├── .env.local                  # Environment variables (create this)
+└── next.config.mjs             # Next.js configuration
 ```
 
 ## 🔑 Environment Variables

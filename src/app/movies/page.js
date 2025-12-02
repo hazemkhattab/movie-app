@@ -4,30 +4,21 @@ import SearchMovie from "../components/SearchMovie";
 
 async function getMovies(page) {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_MAIN_API_URL;
-    const apiKey = process.env.NEXT_PUBLIC_MAIN_API_KEY;
+    // In production (Vercel), use relative URL; in development, use localhost
+    const baseUrl = process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}` 
+      : 'http://localhost:3000';
     
-    if (!apiUrl || !apiKey) {
-      console.error('Missing environment variables');
-      return { results: [], total_pages: 0 };
-    }
-    
-    const url = `${apiUrl}/3/movie/popular?api_key=${apiKey}&page=${page}`;
-    console.log('Fetching from:', url.replace(apiKey, 'API_KEY_HIDDEN'));
-    
-    const res = await fetch(url, { 
+    const res = await fetch(`${baseUrl}/api/movies?page=${page}`, { 
       cache: "no-store"
     });
     
     if (!res.ok) {
-      console.error(`API Error: ${res.status} - ${res.statusText}`);
-      const errorText = await res.text();
-      console.error('Error response:', errorText);
+      console.error(`API Error: ${res.status}`);
       return { results: [], total_pages: 0 };
     }
     
     const data = await res.json();
-    console.log('Movies fetched:', data.results?.length || 0);
     return data;
   } catch (error) {
     console.error('Error fetching movies:', error);

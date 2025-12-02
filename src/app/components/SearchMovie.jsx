@@ -17,9 +17,7 @@ function SearchMovie() {
       setIsLoading(true);
       const delay = setTimeout(async () => {
         try {
-          const res = await fetch(
-            `${process.env.NEXT_PUBLIC_MAIN_API_URL}/3/search/movie?api_key=${process.env.NEXT_PUBLIC_MAIN_API_KEY}&query=${searchQuery}`
-          );
+          const res = await fetch(`/api/search?query=${encodeURIComponent(searchQuery)}`);
           const data = await res.json();
           setResults(data.results || []);
         } catch (error) {

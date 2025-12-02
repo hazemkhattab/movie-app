@@ -13,14 +13,11 @@ function Page() {
   useEffect(() => {
     async function fetchMovie() {
       try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_MAIN_API_URL}/3/movie/${movieId}?api_key=${process.env.NEXT_PUBLIC_MAIN_API_KEY}`,
-          {
-            cache: "force-cache",
-          }
-        );
-        const data = await res.json();
-        setMovie(data);
+        const res = await fetch(`/api/movie/${movieId}`);
+        if (res.ok) {
+          const data = await res.json();
+          setMovie(data);
+        }
       } finally {
         setLoading(false);
       }
