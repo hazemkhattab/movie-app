@@ -88,6 +88,20 @@ After deployment, test these features:
 
 ## 🐛 Common Issues & Solutions
 
+### Issue: "No Movies Found" on Deployed Site
+**Most Common Cause**: Environment variables not set in Vercel
+
+**Solution**:
+1. Go to Vercel Dashboard → Your Project → Settings → Environment Variables
+2. Add these variables:
+   ```
+   NEXT_PUBLIC_MAIN_API_URL = https://api.themoviedb.org
+   NEXT_PUBLIC_MAIN_API_KEY = your_tmdb_api_key
+   ```
+3. **IMPORTANT**: Apply to Production, Preview, AND Development
+4. After adding, go to Deployments tab → Click the three dots on latest deployment → "Redeploy"
+5. Visit `/env-check` on your deployed site to verify variables are loaded
+
 ### Issue: Build Fails
 **Solution**: Check Vercel build logs, ensure environment variables are set
 

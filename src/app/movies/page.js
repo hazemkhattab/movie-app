@@ -4,19 +4,31 @@ import SearchMovie from "../components/SearchMovie";
 
 async function getMovies(page) {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_MAIN_API_URL}/3/movie/popular?api_key=${process.env.NEXT_PUBLIC_MAIN_API_KEY}&page=${page}`,
-      { 
-        cache: "no-store",
-        next: { revalidate: 3600 } // Revalidate every hour
-      }
-    );
+    const apiUrl = process.env.NEXT_PUBLIC_MAIN_API_URL;
+    const apiKey = process.env.NEXT_PUBLIC_MAIN_API_KEY;
     
-    if (!res.ok) {
-      throw new Error(`Failed to fetch movies: ${res.status}`);
+    if (!apiUrl || !apiKey) {
+      console.error('Missing environment variables');
+      return { results: [], total_pages: 0 };
     }
     
-    return res.json();
+    const url = `${apiUrl}/3/movie/popular?api_key=${apiKey}&page=${page}`;
+    console.log('Fetching from:', url.replace(apiKey, 'API_KEY_HIDDEN'));
+    
+    const res = await fetch(url, { 
+      cache: "no-store"
+    });
+    
+    if (!res.ok) {
+      console.error(`API Error: ${res.status} - ${res.statusText}`);
+      const errorText = await res.text();
+      console.error('Error response:', errorText);
+      return { results: [], total_pages: 0 };
+    }
+    
+    const data = await res.json();
+    console.log('Movies fetched:', data.results?.length || 0);
+    return data;
   } catch (error) {
     console.error('Error fetching movies:', error);
     return { results: [], total_pages: 0 };
