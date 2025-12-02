@@ -1,36 +1,120 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🎬 CineHub - Movie Discovery App
 
-## Getting Started
+A modern movie discovery application built with Next.js 16, featuring server-side rendering, dynamic search, and beautiful UI powered by Tailwind CSS.
 
-First, run the development server:
+## ✨ Features
+
+- 🎥 Browse popular movies from TMDB
+- 🔍 Real-time movie search
+- 📄 Pagination for movie lists
+- 📱 Responsive design
+- ⚡ Server-side rendering for better SEO
+- 🎨 Modern UI with gradient effects and animations
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js 18+ installed
+- TMDB API key ([Get one here](https://www.themoviedb.org/settings/api))
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd movie-app-master
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+   
+   Create a `.env.local` file in the root directory:
+   ```env
+   NEXT_PUBLIC_MAIN_API_URL=https://api.themoviedb.org
+   NEXT_PUBLIC_MAIN_API_KEY=your_api_key_here
+   ```
+
+4. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+
+5. **Open your browser**
+   
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## 📦 Build for Production
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🌐 Deploy on Vercel
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+For detailed deployment instructions, see [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md)
 
-## Learn More
+### Quick Deploy Steps:
 
-To learn more about Next.js, take a look at the following resources:
+1. Push your code to GitHub
+2. Import to Vercel
+3. Add environment variables in Vercel dashboard:
+   - `NEXT_PUBLIC_MAIN_API_URL`
+   - `NEXT_PUBLIC_MAIN_API_KEY`
+4. Deploy!
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Framework**: Next.js 16 (App Router)
+- **Styling**: Tailwind CSS 4
+- **API**: TMDB (The Movie Database)
+- **Language**: JavaScript
+- **Deployment**: Vercel
 
-## Deploy on Vercel
+## 📁 Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+movie-app-master/
+├── src/
+│   └── app/
+│       ├── components/      # React components
+│       │   ├── Navbar.jsx
+│       │   ├── Footer.jsx
+│       │   ├── MovieCard.jsx
+│       │   ├── SearchMovie.jsx
+│       │   └── Pagination.jsx
+│       ├── movies/          # Movies list page
+│       ├── movie/[id]/      # Movie detail page
+│       ├── about/           # About page
+│       ├── layout.js        # Root layout
+│       └── page.js          # Home page
+├── public/                  # Static assets
+├── .env.local              # Environment variables (create this)
+└── next.config.mjs         # Next.js configuration
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔑 Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `NEXT_PUBLIC_MAIN_API_URL` | TMDB API base URL | Yes |
+| `NEXT_PUBLIC_MAIN_API_KEY` | Your TMDB API key | Yes |
+
+## 📝 License
+
+This project is open source and available under the MIT License.
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+## 📧 Contact
+
+For questions or support, please open an issue on GitHub.

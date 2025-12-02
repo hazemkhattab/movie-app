@@ -3,11 +3,24 @@ import Pagination from "../components/Pagination";
 import SearchMovie from "../components/SearchMovie";
 
 async function getMovies(page) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_MAIN_API_URL}/3/movie/popular?api_key=${process.env.NEXT_PUBLIC_MAIN_API_KEY}&page=${page}`,
-    { cache: "no-store" }
-  );
-  return res.json();
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_MAIN_API_URL}/3/movie/popular?api_key=${process.env.NEXT_PUBLIC_MAIN_API_KEY}&page=${page}`,
+      { 
+        cache: "no-store",
+        next: { revalidate: 3600 } // Revalidate every hour
+      }
+    );
+    
+    if (!res.ok) {
+      throw new Error(`Failed to fetch movies: ${res.status}`);
+    }
+    
+    return res.json();
+  } catch (error) {
+    console.error('Error fetching movies:', error);
+    return { results: [], total_pages: 0 };
+  }
 }
 
 export default async function Page({ searchParams }) {
