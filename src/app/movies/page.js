@@ -9,19 +9,28 @@ async function getMovies(page) {
       ? `https://${process.env.VERCEL_URL}` 
       : 'http://localhost:3000';
     
-    const res = await fetch(`${baseUrl}/api/movies?page=${page}`, { 
+    const url = `${baseUrl}/api/movies?page=${page}`;
+    console.log('=== Fetching movies from:', url);
+    
+    const res = await fetch(url, { 
       cache: "no-store"
     });
     
+    console.log('=== Response status:', res.status);
+    
     if (!res.ok) {
-      console.error(`API Error: ${res.status}`);
+      const errorText = await res.text();
+      console.error(`=== API Error: ${res.status}`, errorText);
       return { results: [], total_pages: 0 };
     }
     
     const data = await res.json();
+    console.log('=== Movies received:', data.results?.length || 0);
+    console.log('=== Has error?', data.error);
+    console.log('=== Debug info:', data.debug);
     return data;
   } catch (error) {
-    console.error('Error fetching movies:', error);
+    console.error('=== Error fetching movies:', error);
     return { results: [], total_pages: 0 };
   }
 }
