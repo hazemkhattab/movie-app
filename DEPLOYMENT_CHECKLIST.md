@@ -44,9 +44,11 @@ Before deploying to Vercel, ensure:
 3. **Configure Environment Variables**
    In Vercel project settings:
    ```
-   NEXT_PUBLIC_MAIN_API_URL = https://api.themoviedb.org
-   NEXT_PUBLIC_MAIN_API_KEY = your_tmdb_api_key
+   TMDB_API_URL = https://api.themoviedb.org
+   TMDB_API_KEY = 8a8a9a0da8e68fef73130a166b104788
    ```
+   
+   ✅ Check all three: Production, Preview, Development
 
 4. **Deploy**
    - Click "Deploy"
@@ -66,8 +68,8 @@ vercel login
 vercel
 
 # Set environment variables
-vercel env add NEXT_PUBLIC_MAIN_API_URL
-vercel env add NEXT_PUBLIC_MAIN_API_KEY
+vercel env add TMDB_API_URL
+vercel env add TMDB_API_KEY
 
 # Deploy to production
 vercel --prod
@@ -114,9 +116,10 @@ After deployment, test these features:
 - Check TMDB API key is valid
 - Ensure API key has correct permissions
 
-### Issue: "NEXT_PUBLIC_MAIN_API_KEY is undefined"
+### Issue: "TMDB_API_KEY is undefined"
 **Solution**: 
 - Add variables in Vercel dashboard under Settings → Environment Variables
+- Use `TMDB_API_URL` and `TMDB_API_KEY` (not NEXT_PUBLIC_*)
 - Redeploy after adding variables
 
 ## 📊 Expected Build Output

@@ -9,8 +9,8 @@ export async function GET(request) {
       return NextResponse.json({ results: [] });
     }
     
-    const apiUrl = process.env.NEXT_PUBLIC_MAIN_API_URL;
-    const apiKey = process.env.NEXT_PUBLIC_MAIN_API_KEY;
+    const apiUrl = process.env.TMDB_API_URL || process.env.NEXT_PUBLIC_MAIN_API_URL;
+    const apiKey = process.env.TMDB_API_KEY || process.env.NEXT_PUBLIC_MAIN_API_KEY;
     
     if (!apiUrl || !apiKey) {
       return NextResponse.json(

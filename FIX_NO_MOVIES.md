@@ -12,17 +12,19 @@ Your app now uses serverless API routes (recommended by Vercel). You need to set
 ### Step 2: Add Environment Variables
 1. Click **Settings** (top menu)
 2. Click **Environment Variables** (left sidebar)
-3. Add these two variables:
+3. Add these variables (use the server-side names without NEXT_PUBLIC):
 
 #### Variable 1:
-- **Key**: `NEXT_PUBLIC_MAIN_API_URL`
+- **Key**: `TMDB_API_URL`
 - **Value**: `https://api.themoviedb.org`
 - **Environments**: ✅ Production ✅ Preview ✅ Development
 
 #### Variable 2:
-- **Key**: `NEXT_PUBLIC_MAIN_API_KEY`
+- **Key**: `TMDB_API_KEY`
 - **Value**: `8a8a9a0da8e68fef73130a166b104788`
 - **Environments**: ✅ Production ✅ Preview ✅ Development
+
+**Note:** Use `TMDB_API_URL` and `TMDB_API_KEY` (without `NEXT_PUBLIC_` prefix) for better security. These variables will only be accessible on the server, not in the browser.
 
 ### Step 3: Redeploy
 1. Go to **Deployments** tab (top menu)
@@ -65,11 +67,11 @@ Vercel Dashboard
 
 ### Format:
 ```
-Key: NEXT_PUBLIC_MAIN_API_URL
+Key: TMDB_API_URL
 Value: https://api.themoviedb.org
 ☑ Production  ☑ Preview  ☑ Development
 
-Key: NEXT_PUBLIC_MAIN_API_KEY  
+Key: TMDB_API_KEY  
 Value: 8a8a9a0da8e68fef73130a166b104788
 ☑ Production  ☑ Preview  ☑ Development
 ```
@@ -99,7 +101,7 @@ Deployments
 4. Look for messages like "Missing environment variables"
 
 ### Common Mistakes:
-- ❌ Variable name typo (must be EXACT: `NEXT_PUBLIC_MAIN_API_URL`)
+- ❌ Variable name typo (use `TMDB_API_URL` and `TMDB_API_KEY`, NOT `NEXT_PUBLIC_MAIN_API_*`)
 - ❌ Forgot to check all three environment boxes (Production, Preview, Development)
 - ❌ Didn't redeploy after adding variables
 - ❌ Extra spaces in the variable values
