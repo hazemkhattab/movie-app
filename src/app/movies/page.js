@@ -4,33 +4,30 @@ import SearchMovie from "../components/SearchMovie";
 
 async function getMovies(page) {
   try {
-    // In production (Vercel), use relative URL; in development, use localhost
-    const baseUrl = process.env.VERCEL_URL 
-      ? `https://${process.env.VERCEL_URL}` 
-      : 'http://localhost:3000';
+    // Call TMDB API directly instead of going through our own API route
+    const apiUrl = process.env.TMDB_API_URL || process.env.NEXT_PUBLIC_MAIN_API_URL || 'https://api.themoviedb.org';
+    const apiKey = process.env.TMDB_API_KEY || process.env.NEXT_PUBLIC_MAIN_API_KEY;
     
-    const url = `${baseUrl}/api/movies?page=${page}`;
-    console.log('=== Fetching movies from:', url);
+    if (!apiKey) {
+      console.error('TMDB API key is not configured');
+      return { results: [], total_pages: 0 };
+    }
+
+    const url = `${apiUrl}/3/movie/popular?api_key=${apiKey}&page=${page}`;
     
     const res = await fetch(url, { 
       cache: "no-store"
     });
     
-    console.log('=== Response status:', res.status);
-    
     if (!res.ok) {
-      const errorText = await res.text();
-      console.error(`=== API Error: ${res.status}`, errorText);
+      console.error('TMDB API Error:', res.status);
       return { results: [], total_pages: 0 };
     }
     
     const data = await res.json();
-    console.log('=== Movies received:', data.results?.length || 0);
-    console.log('=== Has error?', data.error);
-    console.log('=== Debug info:', data.debug);
     return data;
   } catch (error) {
-    console.error('=== Error fetching movies:', error);
+    console.error('Error fetching movies:', error);
     return { results: [], total_pages: 0 };
   }
 }
